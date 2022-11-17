@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Input from './Input';
 
 const Messages = () => {
   let [message, setMessage] = useState('');
@@ -9,6 +10,11 @@ const Messages = () => {
     setMessage(message.text);
   }
   getMessage();
-  return <h1>{message}</h1>;
+  return (
+    <h1>
+      {message}
+      <Input />
+    </h1>
+  );
 };
 export default Messages;
