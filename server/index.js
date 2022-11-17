@@ -2,9 +2,14 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const { syncAndSeed, Message } = require('../db');
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require('socket.io');
+const io = new Server(server);
 
-app.listen(3000, () => {
-  console.log('listening on port 3000');
+const PORT = 3000 || process.env.PORT;
+server.listen(PORT, () => {
+  console.log(`listening on port ${PORT}`);
 });
 
 app.use(
@@ -20,6 +25,10 @@ app.get('/', (req, res, next) => {
   } catch (error) {
     next(error);
   }
+});
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
 });
 
 app.get('/message', async (req, res, next) => {
