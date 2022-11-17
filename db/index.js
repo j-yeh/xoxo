@@ -1,4 +1,4 @@
 const { syncAndSeed } = require('./seed');
-const { Message } = require('./models');
+const { Message, User } = require('./models');
 
-module.exports = { syncAndSeed, Message };
+module.exports = { syncAndSeed, Message, User };

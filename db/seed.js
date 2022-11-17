@@ -1,5 +1,5 @@
 const { conn } = require('./conn');
-const { Message } = require('./models');
+const { Message, User } = require('./models');
 
 const syncAndSeed = async () => {
   try {
