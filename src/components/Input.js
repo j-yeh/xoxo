@@ -1,5 +1,9 @@
 import React from 'react';
 import io from 'socket.io-client';
+import { Button } from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
+import TextField from '@mui/material/TextField';
+import ModeIcon from '@mui/icons-material/Mode';
 
 // const socket = io.connect('http://localhost:8080/');
 var socket = io();
@@ -37,24 +41,34 @@ class Input extends React.Component {
   render() {
     return (
       <div>
-        <form>
-          <input
-            placeholder="type here"
+        <form
+          onSubmit={(evt) => {
+            this.sendMessage(evt);
+          }}
+        >
+          <TextField
             name="message"
             value={this.state.message}
             onChange={this.handleChange}
-          ></input>
-          <button
-            onClick={(evt) => {
-              this.sendMessage(evt);
-            }}
+            id="standard-basic"
+            label="Type Here"
+            variant="standard"
+          />
+          <Button
+            type="submit"
+            variant="outlined"
+            size="small"
+            // variant="contained"
+            endIcon={<SendIcon />}
           >
             Send
-          </button>
-          <h2>Chat Log</h2>
-          {this.state.messageReceived.map((message) => {
-            return <h3>{message}</h3>;
-          })}
+          </Button>
+          <h4>Chat Log</h4>
+          <div>
+            {this.state.messageReceived.map((message, index) => {
+              return <p key={index}>{message}</p>;
+            })}
+          </div>
         </form>
       </div>
     );
