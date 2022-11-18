@@ -3,16 +3,16 @@ import axios from 'axios';
 import Input from './Input';
 
 const Messages = () => {
-  let [message, setMessage] = useState('');
+  let [dbmessage, setdbMessage] = useState('');
 
   async function getMessage() {
-    const { data: message } = await axios.get('/message');
-    setMessage(message.text);
+    const { data: dbmessage } = await axios.get('/message');
+    setdbMessage(dbmessage.text);
   }
   getMessage();
   return (
     <h1>
-      {message}
+      {dbmessage}
       <Input />
     </h1>
   );

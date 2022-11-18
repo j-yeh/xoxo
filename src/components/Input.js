@@ -7,12 +7,22 @@ var socket = io();
 class Input extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      message: '',
+    };
     this.sendMessage = this.sendMessage.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
+
   sendMessage(evt) {
     evt.preventDefault();
-    socket.emit('chat message', { message: 'Hello' });
+    socket.emit('chat message', { message: this.state.message });
+  }
+
+  handleChange(evt) {
+    this.setState({
+      [evt.target.name]: evt.target.value,
+    });
   }
   componentDidMount() {
     socket.on('receive message', (data) => {
@@ -24,7 +34,12 @@ class Input extends React.Component {
     return (
       <div>
         <form>
-          <input placeholder="type here"></input>
+          <input
+            placeholder="type here"
+            name="message"
+            value={this.state.message}
+            onChange={this.handleChange}
+          ></input>
           <button
             onClick={(evt) => {
               this.sendMessage(evt);
