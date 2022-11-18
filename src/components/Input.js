@@ -9,7 +9,7 @@ class Input extends React.Component {
     super();
     this.state = {
       message: '',
-      messageReceived: '',
+      messageReceived: [],
     };
     this.sendMessage = this.sendMessage.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -18,6 +18,7 @@ class Input extends React.Component {
   sendMessage(evt) {
     evt.preventDefault();
     socket.emit('chat message', { message: this.state.message });
+    this.setState({ message: '' });
   }
 
   handleChange(evt) {
@@ -26,8 +27,10 @@ class Input extends React.Component {
     });
   }
   componentDidMount() {
-    socket.on('receive message', (data) => {
-      this.setState({ messageReceived: data.message });
+    socket.on('receive message', ({ message }) => {
+      this.setState({
+        messageReceived: [...this.state.messageReceived, message],
+      });
     });
   }
 
@@ -41,7 +44,6 @@ class Input extends React.Component {
             value={this.state.message}
             onChange={this.handleChange}
           ></input>
-          <h2>{this.state.messageReceived}</h2>
           <button
             onClick={(evt) => {
               this.sendMessage(evt);
@@ -49,6 +51,10 @@ class Input extends React.Component {
           >
             Send
           </button>
+          <h2>Chat Log</h2>
+          {this.state.messageReceived.map((message) => {
+            return <h3>{message}</h3>;
+          })}
         </form>
       </div>
     );
