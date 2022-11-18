@@ -21,10 +21,7 @@ server.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
 
-app.use(
-  '/bundle.js',
-  express.static(path.join(__dirname, '../public/bundle.js'))
-);
+app.use(express.static(path.join(__dirname, '..', '/public')));
 
 syncAndSeed();
 
@@ -41,6 +38,7 @@ io.on('connection', (socket) => {
   socket.emit('online users', socket.id);
   socket.on('chat message', (data) => {
     console.log(data);
+    socket.emit('receive message', data);
     socket.broadcast.emit('receive message', data);
   });
   socket.on('disconnect', () => {

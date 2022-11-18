@@ -12,6 +12,7 @@ class Input extends React.Component {
   constructor() {
     super();
     this.state = {
+      name: '',
       message: '',
       messageReceived: [],
     };
@@ -22,6 +23,7 @@ class Input extends React.Component {
   sendMessage(evt) {
     evt.preventDefault();
     socket.emit('chat message', {
+      name: this.state.name,
       message: this.state.message,
       date: new Date().toLocaleString(),
     });
@@ -35,10 +37,13 @@ class Input extends React.Component {
     });
   }
   componentDidMount() {
-    socket.on('receive message', ({ message, date }) => {
+    socket.on('receive message', ({ name, message, date }) => {
       console.log(date);
       this.setState({
-        messageReceived: [...this.state.messageReceived, { message, date }],
+        messageReceived: [
+          ...this.state.messageReceived,
+          { name, message, date },
+        ],
       });
     });
   }
@@ -51,6 +56,15 @@ class Input extends React.Component {
             this.sendMessage(evt);
           }}
         >
+          <TextField
+            name="name"
+            value={this.state.name}
+            onChange={this.handleChange}
+            id="standard-basic"
+            label="Name"
+            variant="standard"
+          />
+          <br />
           <TextField
             name="message"
             value={this.state.message}
@@ -68,12 +82,14 @@ class Input extends React.Component {
             Send
           </Button>
           <h4>Chat Log</h4>
-          <div>
+          <div className="chat-log-container">
             {this.state.messageReceived.map((message, index) => {
               return (
                 <div key={index}>
-                  <p>{message.message}</p>
-                  <p>{message.date}</p>
+                  <div>
+                    {message.name}: {message.message}
+                  </div>{' '}
+                  <span>{message.date}</span>
                 </div>
               );
             })}

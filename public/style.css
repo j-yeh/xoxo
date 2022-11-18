@@ -1,3 +1,7 @@
 * {
   color: pink;
 }
+
+.chat-log-container {
+  border: 1px solid salmon;
+}
