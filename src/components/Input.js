@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import ModeIcon from '@mui/icons-material/Mode';
 
 // const socket = io.connect('http://localhost:8080/');
-var socket = io();
+var socket = io.connect();
 
 class Input extends React.Component {
   constructor() {
