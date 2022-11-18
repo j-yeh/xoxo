@@ -21,7 +21,11 @@ class Input extends React.Component {
 
   sendMessage(evt) {
     evt.preventDefault();
-    socket.emit('chat message', { message: this.state.message });
+    socket.emit('chat message', {
+      message: this.state.message,
+      date: new Date().toLocaleString(),
+    });
+
     this.setState({ message: '' });
   }
 
@@ -31,9 +35,10 @@ class Input extends React.Component {
     });
   }
   componentDidMount() {
-    socket.on('receive message', ({ message }) => {
+    socket.on('receive message', ({ message, date }) => {
+      console.log(date);
       this.setState({
-        messageReceived: [...this.state.messageReceived, message],
+        messageReceived: [...this.state.messageReceived, { message, date }],
       });
     });
   }
@@ -58,7 +63,6 @@ class Input extends React.Component {
             type="submit"
             variant="outlined"
             size="small"
-            // variant="contained"
             endIcon={<SendIcon />}
           >
             Send
@@ -66,7 +70,12 @@ class Input extends React.Component {
           <h4>Chat Log</h4>
           <div>
             {this.state.messageReceived.map((message, index) => {
-              return <p key={index}>{message}</p>;
+              return (
+                <div key={index}>
+                  <p>{message.message}</p>
+                  <p>{message.date}</p>
+                </div>
+              );
             })}
           </div>
         </form>

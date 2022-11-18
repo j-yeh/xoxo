@@ -38,6 +38,7 @@ app.get('/', (req, res, next) => {
 
 io.on('connection', (socket) => {
   console.log(`a user connected: ${socket.id}`);
+  socket.emit('online users', socket.id);
   socket.on('chat message', (data) => {
     console.log(data);
     socket.broadcast.emit('receive message', data);
