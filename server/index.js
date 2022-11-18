@@ -12,9 +12,9 @@ const cors = require('cors');
 app.use(cors());
 
 const io = new Server(server, {
-  cors: {
-    origin: `http://localhost:3000`,
-  },
+  // cors: {
+  //   origin: `http://localhost:3000`,
+  // },
 });
 
 server.listen(PORT, () => {
