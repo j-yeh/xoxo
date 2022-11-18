@@ -9,6 +9,7 @@ class Input extends React.Component {
     super();
     this.state = {
       message: '',
+      messageReceived: '',
     };
     this.sendMessage = this.sendMessage.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -26,7 +27,7 @@ class Input extends React.Component {
   }
   componentDidMount() {
     socket.on('receive message', (data) => {
-      alert(data.message);
+      this.setState({ messageReceived: data.message });
     });
   }
 
@@ -40,6 +41,7 @@ class Input extends React.Component {
             value={this.state.message}
             onChange={this.handleChange}
           ></input>
+          <h2>{this.state.messageReceived}</h2>
           <button
             onClick={(evt) => {
               this.sendMessage(evt);
