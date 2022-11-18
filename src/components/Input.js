@@ -13,7 +13,11 @@ class Input extends React.Component {
   sendMessage(evt) {
     evt.preventDefault();
     socket.emit('chat message', { message: 'Hello' });
-    console.log('hi');
+  }
+  componentDidMount() {
+    socket.on('receive message', (data) => {
+      alert(data.message);
+    });
   }
 
   render() {
