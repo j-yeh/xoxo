@@ -1,9 +1,9 @@
 import React from 'react';
 import io from 'socket.io-client';
-import { Button } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import TextField from '@mui/material/TextField';
-import ModeIcon from '@mui/icons-material/Mode';
+import MoodIcon from '@mui/icons-material/Mood';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 
@@ -17,7 +17,7 @@ class Input extends React.Component {
       name: '',
       message: '',
       messageReceived: [],
-      showEmojis: true,
+      showEmojis: false,
     };
     this.sendMessage = this.sendMessage.bind(this);
     this.addEmoji = this.addEmoji.bind(this);
@@ -85,14 +85,19 @@ class Input extends React.Component {
             label="Type Here"
             variant="standard"
           />
-          {/* <button onClick={this.setState({ showEmojis: true })}>show</button> */}
+          <IconButton
+            aria-label="emoji"
+            onClick={() => {
+              this.setState({ showEmojis: !this.state.showEmojis });
+            }}
+          >
+            <MoodIcon />
+          </IconButton>
           {this.state.showEmojis ? (
             <span>
               <Picker data={data} onEmojiSelect={this.addEmoji} />
             </span>
-          ) : (
-            <span></span>
-          )}
+          ) : null}
           <Button
             type="submit"
             variant="outlined"
