@@ -62,8 +62,9 @@ class Input extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="input-div">
         <form
+          className="input-form"
           onSubmit={(evt) => {
             this.sendMessage(evt);
           }}
@@ -111,10 +112,10 @@ class Input extends React.Component {
             {this.state.messageReceived.map((message, index) => {
               return (
                 <div key={index}>
-                  <div>
+                  <div id="message">
                     {message.name}: {message.message}
                   </div>{' '}
-                  <span>{message.date}</span>
+                  <p id="date">{message.date}</p>
                 </div>
               );
             })}

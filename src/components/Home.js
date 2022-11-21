@@ -21,9 +21,11 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <h1>xoxo</h1>
-        <p>Online Users:</p>
-        <div>{this.state.onlineUsers}</div>
+        <section id="logo-wrapper">
+          <img src="logo-192x192.png" id="logo"></img>
+        </section>
+        {/* <h1 id="page-name">xoxo</h1> */}
+        <p>Online Users: {this.state.onlineUsers.length}</p>
       </div>
     );
   }

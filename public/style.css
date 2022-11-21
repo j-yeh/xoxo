@@ -1,8 +1,24 @@
 * {
   color: #e38aae;
-  font-family: 'Caveat Brush';
+  font-family: 'Caveat';
 }
 
 .chat-log-container {
   border: 1px solid salmon;
+}
+
+#logo {
+  width: 3em;
+}
+
+.input-form {
+  width: 500px;
+  margin: 0 auto;
+}
+
+#message {
+  font-size: 1em;
+}
+#date {
+  font-size: 0.5em;
 }
