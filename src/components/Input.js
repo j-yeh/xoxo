@@ -114,8 +114,8 @@ class Input extends React.Component {
                 <div key={index}>
                   <div id="message">
                     {message.name}: {message.message}
-                  </div>{' '}
-                  <p id="date">{message.date}</p>
+                    <div id="date">{message.date}</div>{' '}
+                  </div>
                 </div>
               );
             })}
