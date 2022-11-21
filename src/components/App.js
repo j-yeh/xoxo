@@ -6,7 +6,7 @@ import Messages from './Messages';
 const App = () => {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <Home />
       <Messages />
     </div>

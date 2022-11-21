@@ -12,7 +12,7 @@ const Messages = () => {
   getMessage();
   return (
     <h1>
-      {dbmessage}
+      {/* {dbmessage} */}
       <Input />
     </h1>
   );

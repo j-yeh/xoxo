@@ -21,6 +21,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
+        <h1>xoxo</h1>
         <p>Online Users:</p>
         <div>{this.state.onlineUsers}</div>
       </div>

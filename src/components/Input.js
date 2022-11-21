@@ -106,7 +106,7 @@ class Input extends React.Component {
           >
             Send
           </Button>
-          <h4>Chat Log</h4>
+          <h5>Chat Log</h5>
           <div className="chat-log-container">
             {this.state.messageReceived.map((message, index) => {
               return (
